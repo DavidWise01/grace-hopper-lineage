@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grace Hopper — A Lineage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,1,400;9..144,1,500&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#150e21; --ground-2:#1d1430; --surface:#241836; --surface-2:#2c1f42;
+    --edge:#3a2a58; --ink:#ece1f7; --ink-soft:#c3b3da; --ink-mute:#8c7aa6;
+    --violet:#b98bff; --violet-deep:#7c4bd8;
+    --brass:#d6a94e; --brass-bright:#f0c879; --teal:#5eead4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(1100px 720px at 82% -10%, rgba(214,169,78,.10), transparent 58%),
+      radial-gradient(900px 620px at 4% 8%, rgba(120,60,180,.16), transparent 55%),
+      var(--ground);
+    color:var(--ink); font-family:"Space Grotesk",system-ui,sans-serif; line-height:1.6;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px;}
+
+  /* masthead */
+  header{padding:78px 0 28px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:start;}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--brass);margin-bottom:22px;}
+  h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(46px,9vw,104px);
+    line-height:.92;letter-spacing:-.02em;}
+  .rank{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.06em;
+    color:var(--brass-bright);margin-top:16px;}
+  .rank b{color:var(--ink);}
+  .thesis{margin-top:18px;max-width:56ch;font-size:17.5px;color:var(--ink-soft);}
+  .thesis em{font-style:italic;color:var(--brass-bright);}
+  .clockwrap{text-align:center;}
+  .clockwrap svg{width:96px;height:96px;}
+  .clockwrap .cc{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.04em;
+    color:var(--ink-mute);max-width:120px;margin-top:8px;line-height:1.4;}
+
+  /* service record */
+  .record{margin-top:18px;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));}
+  .field{padding:15px 18px 15px 0;border-right:1px solid var(--edge);}
+  .field:last-child{border-right:0;}
+  .field .k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-mute);margin-bottom:5px;}
+  .field .v{font-size:14px;color:var(--ink-soft);line-height:1.45;}
+  .field .v b{color:var(--ink);font-weight:500;}
+
+  section{padding:54px 0 4px;}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap;}
+  .sec-head h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,3.8vw,38px);letter-spacing:-.01em;}
+  .sec-head .tag{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.06em;
+    padding:4px 11px;border-radius:999px;border:1px solid var(--edge);color:var(--ink-soft);}
+  .sec-sub{max-width:74ch;color:var(--ink-soft);margin:4px 0 28px;font-size:16px;}
+  .sec-sub em{color:var(--brass-bright);font-style:normal;}
+
+  /* the lineage spine */
+  .spine{position:relative;padding-left:4px;}
+  .spine::before{content:"";position:absolute;left:29px;top:8px;bottom:14px;width:2px;
+    background:linear-gradient(180deg,transparent,var(--brass) 6%,var(--brass) 94%,transparent);}
+  .band{display:flex;align-items:center;gap:10px;margin:6px 0 14px;padding-left:62px;
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;}
+  .band.up{color:var(--ink-mute);} .band.down{color:var(--brass);}
+  .node{display:grid;grid-template-columns:60px 1fr;gap:18px;align-items:start;margin-bottom:16px;position:relative;}
+  .mono{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    margin:4px auto 0;background:var(--ground-2);border:1.5px solid var(--brass);
+    font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;color:var(--brass-bright);
+    position:relative;z-index:2;}
+  .card{background:linear-gradient(180deg,var(--surface),var(--ground-2));border:1px solid var(--edge);
+    border-radius:13px;padding:14px 17px;}
+  .card .nm{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .card .nm h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;}
+  .card .nm .yr{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-mute);}
+  .card .role{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.03em;
+    color:var(--brass);margin:3px 0 7px;}
+  .card p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;}
+  .card p .pass{display:block;margin-top:7px;color:var(--ink-mute);}
+  .card p .pass b{color:var(--ink-soft);font-weight:500;}
+
+  /* the pivot node */
+  .node.pivot .mono{width:56px;height:56px;font-size:16px;border-width:2px;border-color:var(--brass-bright);
+    background:radial-gradient(circle,rgba(214,169,78,.28),var(--ground-2));
+    box-shadow:0 0 22px -4px rgba(214,169,78,.6);color:var(--brass-bright);margin-top:0;}
+  .node.pivot{grid-template-columns:60px 1fr;margin:8px 0 18px;}
+  .node.pivot .card{border-color:var(--brass);background:linear-gradient(180deg,#2a1d3d,var(--ground-2));}
+  .node.pivot .card .nm h3{font-size:24px;color:var(--brass-bright);}
+  .node.idea .mono{border-style:dashed;color:var(--teal);border-color:var(--teal);}
+
+  /* compiler section */
+  .comp{border:1px solid var(--edge);border-radius:16px;padding:24px;background:linear-gradient(180deg,var(--surface),var(--ground-2));}
+  .comp .lead{font-family:"Fraunces",serif;font-style:italic;font-size:21px;color:var(--brass-bright);
+    margin-bottom:14px;line-height:1.4;}
+  .comp p{font-size:14.5px;color:var(--ink-soft);line-height:1.62;margin-bottom:12px;}
+  .comp p:last-child{margin-bottom:0;}
+  .comp b{color:var(--ink);font-weight:500;}
+  .comp .cb{color:var(--teal);}
+  .chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0;
+    font-family:"JetBrains Mono",monospace;font-size:12.5px;}
+  .chain .s{padding:7px 12px;border:1px solid var(--edge);border-radius:8px;background:rgba(0,0,0,.18);color:var(--ink-soft);}
+  .chain .s b{color:var(--brass-bright);}
+  .chain .ar{color:var(--ink-mute);}
+
+  footer{margin-top:60px;padding:36px 0 70px;border-top:1px solid var(--edge);
+    color:var(--ink-mute);font-size:13px;max-width:82ch;}
+  footer b{color:var(--ink-soft);font-weight:500;}
+  footer em{color:var(--brass-bright);font-style:normal;}
+  .sig{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    margin-top:20px;color:var(--brass);}
+
+  @media (max-width:720px){
+    header{grid-template-columns:1fr;}
+    .clockwrap{justify-self:start;}
+    .node,.node.pivot{grid-template-columns:46px 1fr;gap:12px;}
+    .mono{width:38px;height:38px;font-size:11px;}
+    .node.pivot .mono{width:46px;height:46px;}
+    .spine::before{left:22px;}
+    .band{padding-left:50px;}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <div class="eyebrow">A lineage · the purple papers · V</div>
+      <h1>Grace<br>Hopper</h1>
+      <div class="rank">Rear Admiral, US Navy · <b>1906 – 1992</b> · "Amazing Grace"</div>
+      <p class="thesis">A mathematician who taught machines to read English. She came up through Norwegian abstract algebra, learned the machine itself from Howard Aiken's Harvard Mark&nbsp;I, then built the <em>first compiler</em> — and with it the idea that a computer should do its own clerical work, so people could write in words instead of octal.</p>
+    </div>
+    <div class="clockwrap">
+      <svg id="clock" viewBox="0 0 100 100" aria-hidden="true"></svg>
+      <div class="cc">she kept a clock that ran backward — to fight "we've always done it this way"</div>
+    </div>
+  </header>
+
+  <section id="who" style="padding-top:26px;">
+    <div class="sec-head"><h2>Who she was</h2><span class="tag">SERVICE RECORD</span></div>
+    <div class="record">
+      <div class="field"><div class="k">Born</div><div class="v"><b>Dec 9, 1906</b><br>New York City</div></div>
+      <div class="field"><div class="k">Schooling</div><div class="v">Vassar — math & physics, <b>1928</b><br>Yale — PhD mathematics, <b>1934</b></div></div>
+      <div class="field"><div class="k">Known for</div><div class="v">The first <b>compiler</b> (A-0, 1952), FLOW-MATIC, ancestor of <b>COBOL</b></div></div>
+      <div class="field"><div class="k">Coined</div><div class="v"><b>"debugging"</b> — after a moth in a Mark II relay</div></div>
+      <div class="field"><div class="k">Taught with</div><div class="v">11.8-inch wires — a <b>nanosecond</b> of light — and a backward clock</div></div>
+    </div>
+    <p class="sec-sub" style="margin-top:22px;">She entered MIT's rival world from the math side: a Vassar physics-and-math major who took her doctorate in <em>pure algebra</em> — the same abstract, symbol-thinking discipline that, her own historians argue, is exactly what let her later invent a <em>language</em> for machines. When David Letterman asked how she knew so much about computers back then, she answered that she didn't — it was the first one.</p>
+  </section>
+
+  <section id="lineage">
+    <div class="sec-head"><h2>The lineage</h2><span class="tag">WHO TAUGHT HER · WHOM SHE TAUGHT</span></div>
+    <p class="sec-sub">Read it top to bottom — that's the flow of time and of the idea. Above her are the two teachers and the algebraic bloodline they carried; below her are not students with degrees but the <em>teams and the language</em> she set loose. She has almost no academic descendants. Her descendants are <em>programs</em>.</p>
+
+    <div class="spine" id="spine"></div>
+  </section>
+
+  <section id="compiler">
+    <div class="sec-head"><h2>The compiler</h2><span class="tag">A-0 · 1952</span></div>
+    <div class="comp">
+      <div class="lead">"Compile" did not mean translate. It meant <span class="cb">gather</span>.</div>
+      <p>A-0 was a reel of pre-written subroutines, each with a call number. You wrote a list of numbers; A-0 <b>gathered the right routines off the tape and stitched them into one runnable program</b>. The word is the librarian's word — to compile is to collect. By today's standards it was closer to a <b>linker / loader</b> than the optimizing translator we now mean by "compiler," which is why the honest title is "the first thing called a compiler."</p>
+      <p>And notice what that machine actually <span class="cb">was</span>: store each routine <b>once</b>, address it by a <b>number</b>, assemble on demand. Deduplicate, then index. The founding act of the entire field is the same move you keep finding — find the repeat, keep it once, leave a pointer to it.</p>
+      <p>The fight was cultural. The establishment was certain real programs were hand-cut in octal and that a computer could not possibly write a program. Her premise, around 1952, was flat: she could make a computer do <b>anything she could completely define</b>. The point was never cleverness — it was pushing the clerical work down a layer so people could think in meaning.</p>
+      <div class="chain">
+        <span class="s"><b>A-0</b> 1952</span><span class="ar">→</span>
+        <span class="s"><b>A-2</b></span><span class="ar">→</span>
+        <span class="s"><b>FLOW-MATIC</b> ~1955 · English-like</span><span class="ar">→</span>
+        <span class="s"><b>COBOL</b> 1959</span><span class="ar">→</span>
+        <span class="s">every readable language since</span>
+      </div>
+      <p>FLOW-MATIC — the first English-worded data-processing compiler — became the <b>major input</b> to COBOL: long names, English commands, data kept separate from instructions. She was the design committee's technical adviser and many of her own people staffed it. That's why she's the <b>grandmother</b> of COBOL — the ancestor, not the author.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>Gate kept on.</b> "Mother of COBOL" overstates it — Jean Sammet, a lead COBOL designer, said plainly that Hopper was not its mother, creator, or developer, while also saying that without FLOW-MATIC there would have been no COBOL. So: ancestor, yes; author, no. A-0 is the <em>first thing named</em> a compiler; whether it's the first <em>real</em> compiler depends on your definition (Alick Glennie's Autocode, 1952, is the rival claim for a true translator). The upward chain — Thue → Skolem → Ore → Hopper — follows the Mathematics Genealogy Project; advisor attributions from that era can be soft, and Emmy Noether is an <em>influence</em> on Ore, not a formal teacher of Hopper. Quotes paraphrased.</p>
+    <div class="sig">Sources: Yale · MIT · INFORMS · Vassar · Math Genealogy Project · Wikipedia — lineage sketch, not full biography</div>
+  </footer>
+
+</div>
+
+<script>
+const reduce=(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)||false;
+
+/* ---------- lineage data ---------- */
+const ANCESTORS=[
+ {mono:"AT", name:"Axel Thue", yr:"1863–1922", role:"number theory · Norway",
+  body:"The deep root of the bloodline. A Norwegian number theorist whose work seeds the algebra-and-logic school that ran through Oslo.",
+  pass:"the Norwegian algebraic tradition"},
+ {mono:"TS", name:"Thoralf Skolem", yr:"1887–1963", role:"logic & algebra · Oslo",
+  body:"Logician and algebraist — Löwenheim–Skolem, Skolem normal form. Supervised Ore's 1924 doctorate at Kristiania (Oslo).",
+  pass:"rigour in symbols and structure"},
+ {mono:"ØO", name:"Øystein Ore", yr:"1899–1968", role:"abstract algebra · Yale",
+  body:"Hopper's PhD advisor at Yale (1934), a Sterling Professor working in ring and Galois theory. He had absorbed Emmy Noether's new abstract algebra at Göttingen and carried that symbol-first way of thinking into his students.",
+  pass:"abstract algebra — thinking in pure symbols (via Noether)"},
+ {mono:"HA", name:"Howard Aiken", yr:"1900–1973", role:"the machine · Harvard",
+  body:"A different teacher entirely. As her wartime commanding officer he put her on the Harvard Mark I — her first computer — and they co-authored three papers on it. Ore taught her mathematics; Aiken taught her the machine.",
+  pass:"how to actually program a computer"}
+];
+const PIVOT={mono:"GH", name:"Grace Hopper", yr:"1906–1992",
+  role:"mathematician → admiral → the first compiler",
+  body:"The join of the two streams: pure algebra from Ore, the machine from Aiken. She fused symbol-thinking with hardware and decided the computer should translate human words into its own code — and built the thing that did it."};
+const DESCENDANTS=[
+ {mono:"UNI", name:"Her UNIVAC programming teams", yr:"1950s", role:"Remington Rand · she led & trained them",
+  body:"Not graduate students — the programmers she ran at UNIVAC, who built A-0, its successor A-2, and FLOW-MATIC under her. The people she actually trained were her staff.",
+  pass:"the habit of making the machine do the clerical work"},
+ {mono:"COD", name:"The CODASYL / COBOL committee", yr:"1959", role:"she advised · her people staffed it",
+  body:"When the committee met to define a common business language, Hopper served as technical adviser and many of her former employees sat on it. Jean Sammet was a lead designer — colleague and inheritor of the idea, not her pupil.",
+  pass:"English-worded, machine-independent code"},
+ {mono:"COB", name:"COBOL & every readable language after", yr:"1959 →", role:"the true descendants",
+  body:"FLOW-MATIC's DNA — long names, English commands, data split from instructions — became COBOL, then seeded the whole lineage of high-level, human-readable languages. Her heirs aren't people. They're programs you can read.",
+  pass:"the premise that code should be written in words"}
+];
+
+/* ---------- render spine ---------- */
+function nodeHTML(n, cls){
+  return `<div class="node ${cls||''}">
+    <div class="mono">${n.mono}</div>
+    <div class="card">
+      <div class="nm"><h3>${n.name}</h3><span class="yr">${n.yr}</span></div>
+      <div class="role">${n.role}</div>
+      <p>${n.body}${n.pass?`<span class="pass"><b>passed down:</b> ${n.pass}</span>`:''}</p>
+    </div></div>`;
+}
+const spine=document.getElementById('spine');
+let html=`<div class="band up">↑ trained under — the inflow</div>`;
+ANCESTORS.forEach(n=>html+=nodeHTML(n));
+html+=nodeHTML(PIVOT,'pivot');
+html+=`<div class="band down">↓ whom she trained — the outflow</div>`;
+DESCENDANTS.forEach(n=>html+=nodeHTML(n,'idea'));
+spine.innerHTML=html;
+
+/* ---------- backward clock ---------- */
+const C=document.getElementById('clock');
+const NS="http://www.w3.org/2000/svg";
+function mk(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+C.appendChild(mk("circle",{cx:50,cy:50,r:44,fill:"none",stroke:"#3a2a58","stroke-width":2}));
+for(let i=0;i<12;i++){
+  const ang=(i/12)*Math.PI*2;
+  const x1=50+38*Math.sin(ang), y1=50-38*Math.cos(ang);
+  const x2=50+43*Math.sin(ang), y2=50-43*Math.cos(ang);
+  C.appendChild(mk("line",{x1,y1,x2,y2,stroke:"#6f5c86","stroke-width":i%3===0?2:1}));
+}
+const hourH=mk("line",{x1:50,y1:50,x2:50,y2:30,stroke:"#d6a94e","stroke-width":3,"stroke-linecap":"round"});
+const minH=mk("line",{x1:50,y1:50,x2:50,y2:18,stroke:"#f0c879","stroke-width":2,"stroke-linecap":"round"});
+const secH=mk("line",{x1:50,y1:50,x2:50,y2:14,stroke:"#5eead4","stroke-width":1});
+C.appendChild(hourH);C.appendChild(minH);C.appendChild(secH);
+C.appendChild(mk("circle",{cx:50,cy:50,r:2.4,fill:"#f0c879"}));
+function setHand(h,ang,len){const x=50+len*Math.sin(ang),y=50-len*Math.cos(ang);h.setAttribute('x2',x);h.setAttribute('y2',y);}
+function tickClock(now){
+  // run COUNTERclockwise: negate the angle
+  const s=(now/1000)%60, m=(now/60000)%60, hr=(now/3600000)%12;
+  setHand(secH, -(s/60)*Math.PI*2, 36);
+  setHand(minH, -(m/60)*Math.PI*2, 32);
+  setHand(hourH,-(hr/12)*Math.PI*2,20);
+}
+if(reduce){ tickClock(8*3600000+10*60000); }   // static ~ 8:10, backward
+else{
+  let base=performance.now();
+  function loop(now){ tickClock((now-base)*1); requestAnimationFrame(loop); }
+  // speed it up a touch so the backwardness is legible
+  function fast(now){ tickClock((now-base)*60); requestAnimationFrame(fast); }
+  requestAnimationFrame(fast);
+}
+</script>
+</body>
+</html>
